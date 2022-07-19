@@ -7,4 +7,9 @@ public class Select implements GetUser{
     public User SelectUserLogin(String username, String password) {
         return null;
     }
+
+    @Override
+    public Integer addUser(String username, String password) {
+        return null;
+    }
 }
