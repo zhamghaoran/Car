@@ -7,11 +7,9 @@ public class truck extends Car{
         super(brand, price, id);
         this.Load = load;
     }
-
     public Integer getLoad() {
         return Load;
     }
-
     public void setLoad(Integer load) {
         Load = load;
     }
