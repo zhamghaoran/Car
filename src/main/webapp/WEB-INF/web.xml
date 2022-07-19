@@ -11,4 +11,20 @@
         <servlet-name>Login</servlet-name>
         <url-pattern>/Car/login</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>register</servlet-name>
+        <servlet-class>com.car.Service.Controller.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/Car/register</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>rent</servlet-name>
+        <servlet-class>com.car.Service.Controller.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>rent</servlet-name>
+        <url-pattern>/Car/rent</url-pattern>
+    </servlet-mapping>
 </web-app>

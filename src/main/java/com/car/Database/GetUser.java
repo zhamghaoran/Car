@@ -7,5 +7,6 @@ public interface GetUser {
     User SelectUserLogin(String username, String password);
 
     Integer addUser(String username,String password);
+    User SelectUserByUsername(String username);
 
 }
