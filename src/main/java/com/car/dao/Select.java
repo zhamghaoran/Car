@@ -24,14 +24,10 @@ public class Select implements UserMapper, CarMapper,RentMapper {
          userMapper = session.getMapper(UserMapper.class);
          rentMapper = session.getMapper(RentMapper.class);
          carMapper = session.getMapper(CarMapper.class);
-
     }
 
     public User SelectUserLogin(String username, String password) {
-
-        User user = userMapper.SelectUserLogin(username,password);
-        if(user == null) return null;
-        else return user;
+        return userMapper.SelectUserLogin(username,password);
     }
 
     public Integer addUser(String username, String password) {
@@ -43,22 +39,16 @@ public class Select implements UserMapper, CarMapper,RentMapper {
     }
 
     public User SelectUserByUsername(String username) {
-        User user= userMapper.SelectUserByUsername(username);
-        if(user == null) return null;
-        else return user;
+        return userMapper.SelectUserByUsername(username);
     }
 
 
     public PrivateCar selectCarById(Integer id) {
-        PrivateCar car = carMapper.selectCarById(id);
-        if(car == null) return null;
-        else return car;
+        return carMapper.selectCarById(id);
     }
 
     public Truck selectTruckById(Integer id) {
-        Truck car = carMapper.selectTruckById(id);
-        if(car == null)return null;
-        else return car;
+        return carMapper.selectTruckById(id);
     }
 
 
@@ -70,8 +60,7 @@ public class Select implements UserMapper, CarMapper,RentMapper {
 
 
     public Integer getRentCarId(User user) {
-        Integer id = rentMapper.getRentCarId(user);
-        return id;
+        return rentMapper.getRentCarId(user);
     }
 
     public Object getRentCar(User user){

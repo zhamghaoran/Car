@@ -1,6 +1,8 @@
 package com.car.Service.Controller;
 
 import com.car.Class.Car.Car;
+import com.car.Class.Car.PrivateCar;
+import com.car.Class.Car.Truck;
 import com.car.Class.User;
 import com.car.dao.Select;
 import com.car.dao.UpdateUser;
@@ -21,25 +23,6 @@ public class Service {
         }
     }
         public String rent(String username,Integer id ,Integer type) {
-        User user = new Select().SelectUserByUsername(username);
-        if(user == null) return "用户不存在";
-        Select select = new Select();
-        Object getCar = select.getRentCar(user);
-        if(getCar != null){
-            return "已租车";
-        }
-        Car car;
-        if (type == 1) {
-            car = new Select().selectCarById(id);
-            select.rentPrivateCar(user.getId(), car.getId());
-        } else {
-            car = new Select().selectTruckById(id);
-        }
-        if ( car == null) {
-            return "车辆信息错误";
-        }
-//        new UpdateUser().UserRent(car,user);
-
-        return "租车成功";
+        return "";
     }
 }
