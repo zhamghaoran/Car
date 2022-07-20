@@ -1,6 +1,5 @@
 package com.car.Class.Car;
 
-import com.sun.tools.sjavac.comp.dependencies.PublicApiCollector;
 
 public class Car {
     public String Brand;

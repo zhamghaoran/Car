@@ -21,7 +21,14 @@ public class Controller extends HttpServlet {
                 Parameter[] parameters = m.getParameters();
                 Object[] parametersValues =  new Object[parameters.length];
                 for (int i = 0;i < parameters.length;i ++) {
-                    parametersValues[i] = req.getParameter(parameters[i].getName());
+                    String parameter = req.getParameter(parameters[i].getName());
+                    String name = parameters[i].getType().getName();
+                    Object parameterObj = parameter;
+                    if (name.equals("java.lang.Integer")) {
+                        parameterObj = Integer.parseInt(parameter);
+                    }
+                    parametersValues[i] = parameterObj;
+
                 }
                 try {
                     Object invoke = m.invoke(new Service(), parametersValues);
