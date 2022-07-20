@@ -55,7 +55,6 @@ public class Select implements UserMapper, CarMapper,RentMapper {
     }
     public Object getRentCar(User user){
         System.out.println(user);
-
         Integer type = rentMapper.getRentCarType(user);
         if(type == null){
             return null;
@@ -81,10 +80,7 @@ public class Select implements UserMapper, CarMapper,RentMapper {
     public List<Truck> GetTruckList() {
         return null;
     }
-    public Boolean FindUserRentOrNot(User user) {
 
-        return true;
-    }
     public int rentPrivateCar(int userid,  int carid){
 
         if(rentMapper.rentPrivateCar(userid,carid) > 0 && carMapper.updateTruckState(carid,1) > 0){
