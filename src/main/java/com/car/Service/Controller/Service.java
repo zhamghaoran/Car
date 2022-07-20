@@ -1,6 +1,4 @@
 package com.car.Service.Controller;
-
-import com.car.Class.Car.Car;
 import com.car.Class.Car.PrivateCar;
 import com.car.Class.Car.Truck;
 import com.car.Class.Response;
@@ -37,6 +35,13 @@ public class Service {
     }
 
     public String rent(String username, Integer id, String type) { // 租车
+        User user = new Select().SelectUserByUsername(username);
+        if (new Select().FindUserRentOrNot(user) == true) {
+            response.status_code = 1;
+            response.status_message = "已租车";
+        } else {
+           new UpdateUser().rent(user,id,type);
+        }
         return "";
     }
 

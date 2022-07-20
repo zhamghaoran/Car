@@ -27,44 +27,32 @@ public class Select implements UserMapper, CarMapper,RentMapper {
          rentMapper = session.getMapper(RentMapper.class);
          carMapper = session.getMapper(CarMapper.class);
     }
-
     public User SelectUserLogin(String username, String password) {
         return userMapper.SelectUserLogin(username,password);
     }
-
     public Integer addUser(String username, String password) {
-
 
         if(userMapper.addUser(username,password) > 0) return 1;
         else return 0;
-
     }
-
     public User SelectUserByUsername(String username) {
         return userMapper.SelectUserByUsername(username);
     }
 
-
     public PrivateCar selectCarById(Integer id) {
         return carMapper.selectCarById(id);
     }
-
     public Truck selectTruckById(Integer id) {
         return carMapper.selectTruckById(id);
     }
-
-
     public Integer getRentCarType(User user) {
         Integer type = rentMapper.getRentCarType(user);
         if(type > 0) return  type;
         else return null;
     }
-
-
     public Integer getRentCarId(User user) {
         return rentMapper.getRentCarId(user);
     }
-
     public Object getRentCar(User user){
         System.out.println(user);
 
@@ -81,26 +69,25 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         }
         return null;
     }
-
     public int updateTruckState(Integer carid,Integer value){
         if(carMapper.updateTruckState(carid,value) > 0)return 1;
         else return 0;
     }
-
     @Override
     public List<PrivateCar> GetPrivateCarList() {
         return null;
     }
-
     @Override
     public List<Truck> GetTruckList() {
         return null;
     }
+    public Boolean FindUserRentOrNot(User user) {
 
+        return true;
+    }
     public int rentPrivateCar(int userid,  int carid){
 
         if(rentMapper.rentPrivateCar(userid,carid) > 0 && carMapper.updateTruckState(carid,1) > 0){
-
             return 1;
         }
         else return 0;
