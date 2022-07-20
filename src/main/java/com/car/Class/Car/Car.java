@@ -12,12 +12,11 @@ public class Car {
     public Integer price;
     public Integer id;
     public Integer state;
+    public Car(String brand, Integer price, Integer id, Integer state) {
+        this.price = price;
+        this.id = id;
+        this.brand = brand;
+        this.state = state;
+    }
 
-
-//    public Car(String brand, Integer price, Integer id, Integer state) {
-//        this.brand = brand;
-//        this.price = price;
-//        this.id = id;
-//        this.state = state;
-//    }
 }

@@ -5,6 +5,8 @@ import com.car.Class.Car.Truck;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 public interface CarMapper {
     @Select("select * from car_privatecar where id = #{id}")
     PrivateCar selectCarById(Integer id);
@@ -22,5 +24,6 @@ public interface CarMapper {
     @Update("update car_truck set state=#{value} where id=#{id}")
     int updateTruckState(@Param("id") Integer id,@Param("value") Integer value);
 
-
+    List<PrivateCar> GetPrivateCarList();
+    List<Truck> GetTruckList();
 }

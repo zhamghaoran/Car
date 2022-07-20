@@ -3,26 +3,68 @@ package com.car.Service.Controller;
 import com.car.Class.Car.Car;
 import com.car.Class.Car.PrivateCar;
 import com.car.Class.Car.Truck;
+import com.car.Class.Response;
 import com.car.Class.User;
 import com.car.dao.Select;
 import com.car.dao.UpdateUser;
+import com.chenerzhu.common.util.SecureUtils;
+import com.google.gson.Gson;
+
+import java.util.List;
 
 public class Service {
-    public String login(String username,String password) {
-        if (new Select().SelectUserLogin(username,password) == null) {
-            return "登录失败 : 用户名或者密码错误";
+    Response response = new Response();
+    public String login(String username, String password) {
+        if (new Select().SelectUserLogin(username, password) == null) {
+            response.status_code = 1;
+            response.status_message = "用户名或者密码错误";
         } else {
-            return "登录成功";
+            response.status_code = 0;
+            response.status_message = "登录成功";
         }
+        return new Gson().toJson(response);
     }
-    public String register(String username,String password) {
-        if (new Select().addUser(username,password) == null) {
-            return "注册失败 : 用户名已存在";
+    public String register(String username, String password) {  // 注册
+        password = SecureUtils.getMD5(password);
+        if (new Select().addUser(username, password) == null) {
+            response.status_code = 1;
+            response.status_message = "用户名已存在";
         } else {
-            return "注册成功";
+            response.status_code = 0;
+            response.status_message = "注册成功";
         }
+        return new Gson().toJson(response);
     }
-        public String rent(String username,Integer id ,Integer type) {
+
+    public String rent(String username, Integer id, String type) { // 租车
         return "";
     }
+
+    public String getprivatecarlist() {  // 获取小车列表
+        List<PrivateCar> privateCars = new Select().GetPrivateCarList();
+        Gson gson = new Gson();
+        response.status_code = 0;
+        response.status_message = null;
+        return gson.toJson(response) + gson.toJson(privateCars);
+    }
+
+    public String gettrucklist() {   // 获取卡车列表
+        List<Truck> trucks = new Select().GetTruckList();
+        Gson gson = new Gson();
+        return gson.toJson(trucks);
+    }
+
+    public String recharge(String username, Integer money) {  // 充值
+        User user = new Select().SelectUserByUsername(username);
+        if (user == null) {
+            response.status_code = 1;
+            response.status_message = "用户名错误";
+        } else {
+            new UpdateUser().charge(user, money);
+            response.status_code = 0;
+            response.status_message = "充值成功";
+        }
+        return new Gson().toJson(response);
+    }
+
 }

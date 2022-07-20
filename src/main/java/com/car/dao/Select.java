@@ -8,6 +8,8 @@ import com.car.util.MybatisUtil;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.List;
+
 public class Select implements UserMapper, CarMapper,RentMapper {
     /**
      * 查不到结果就返回null
@@ -84,6 +86,17 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         if(carMapper.updateTruckState(carid,value) > 0)return 1;
         else return 0;
     }
+
+    @Override
+    public List<PrivateCar> GetPrivateCarList() {
+        return null;
+    }
+
+    @Override
+    public List<Truck> GetTruckList() {
+        return null;
+    }
+
     public int rentPrivateCar(int userid,  int carid){
 
         if(rentMapper.rentPrivateCar(userid,carid) > 0 && carMapper.updateTruckState(carid,1) > 0){
