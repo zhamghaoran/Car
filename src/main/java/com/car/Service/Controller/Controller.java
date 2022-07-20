@@ -28,7 +28,6 @@ public class Controller extends HttpServlet {
                         parameterObj = Integer.parseInt(parameter);
                     }
                     parametersValues[i] = parameterObj;
-
                 }
                 try {
                     Object invoke = m.invoke(new Service(), parametersValues);
