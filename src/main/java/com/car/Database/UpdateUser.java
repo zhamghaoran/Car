@@ -5,7 +5,10 @@ import com.car.Class.User;
 
 public class UpdateUser {
     public void UserRent(Car car, User user) {
-        user.setRent(0);
+
+
+    }
+    public void charge(User user ,Integer money) {
 
     }
 }

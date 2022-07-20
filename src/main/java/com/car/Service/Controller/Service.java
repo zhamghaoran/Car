@@ -1,13 +1,14 @@
 package com.car.Service.Controller;
 
-import com.car.Class.Car.Car;
 import com.car.Class.Car.privateCar;
 import com.car.Class.Car.truck;
 import com.car.Class.User;
 import com.car.Database.Select;
 import com.car.Database.UpdateUser;
+import com.google.gson.Gson;
+import com.chenerzhu.common.util.SecureUtils;
 
-import java.security.PublicKey;
+import java.util.List;
 
 public class Service {
     public String login(String username,String password) {
@@ -18,6 +19,7 @@ public class Service {
         }
     }
     public String register(String username,String password) {
+        password = SecureUtils.getMD5(password);
         if (new Select().addUser(username,password) == null) {
             return "注册失败 : 用户名已存在";
         } else {
@@ -25,20 +27,25 @@ public class Service {
         }
     }
     public String rent(String username,Integer id ,String type) {
+        return "";
+    }
+    public String getprivatecarlist() {
+        List<privateCar> privateCars = new Select().GetPrivateCarList();
+        Gson gson = new Gson();
+        return gson.toJson(privateCars);
+    }
+    public String gettrucklist() {
+        List<truck> trucks = new Select().GetTruckList();
+        Gson gson = new Gson();
+        return gson.toJson(trucks);
+    }
+    public String recharge(String username ,Integer money) {
         User user = new Select().SelectUserByUsername(username);
-        if (user.getRent() == 1) {
-            return "已租车";
+        if (user == null)
+            return "用户名错误";
+        else {
+            new UpdateUser().charge(user,money);
+            return "充值成功";
         }
-        Car car;
-        if (type.equals("privateCar")) {
-            car = new Select().selectCarById(id);
-        } else {
-            car = new Select().selectTruckById(id);
-        }
-        if ( car == null) {
-            return "车辆信息错误";
-        }
-        new UpdateUser().UserRent(car,user);
-        return "租车成功";
     }
 }

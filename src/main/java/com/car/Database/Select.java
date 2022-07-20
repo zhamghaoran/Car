@@ -18,6 +18,10 @@ public class Select implements GetUser,GetCar{
     public Integer addUser(String username, String password) {
         return null;
     }
+    /**
+     * 如果发现用户已存在就返回空
+     * 否则就返回User并且添加到数据库。
+     * */
     @Override
     public User SelectUserByUsername(String username) {
         return null;
