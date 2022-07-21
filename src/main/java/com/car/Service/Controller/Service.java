@@ -45,16 +45,16 @@ public class Service {
         return "";
     }
 
-    public String getprivatecarlist() {  // 获取小车列表
-        List<PrivateCar> privateCars = new Select().GetPrivateCarList();
+    public String getprivatecarlist(Integer userid) {  // 获取小车列表
+        List<PrivateCar> privateCars = new Select().GetRentedPrivateCarList(userid);
         Gson gson = new Gson();
         response.status_code = 0;
         response.status_message = null;
         return gson.toJson(response) + gson.toJson(privateCars);
     }
 
-    public String gettrucklist() {   // 获取卡车列表
-        List<Truck> trucks = new Select().GetTruckList();
+    public String gettrucklist(Integer userid) {   // 获取卡车列表
+        List<Truck> trucks = new Select().GetRentedTruckList(userid);
         Gson gson = new Gson();
         return gson.toJson(trucks);
     }

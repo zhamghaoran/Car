@@ -1,11 +1,9 @@
 package com.car.dao;
 
-import com.car.Class.Car.Car;
 import com.car.Class.Car.PrivateCar;
 import com.car.Class.Car.Truck;
 import com.car.Class.User;
 import com.car.util.MybatisUtil;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
@@ -74,16 +72,32 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         else return 0;
     }
     @Override
-    public List<PrivateCar> GetPrivateCarList() {
-        return null;
+    public List<PrivateCar> GetRentedPrivateCarList(Integer userid) {
+        List<PrivateCar>  privateCarList= rentMapper.GetRentedPrivateCarList(userid);
+        if(privateCarList == null) return null;
+        return privateCarList;
     }
     @Override
-    public List<Truck> GetTruckList() {
-        return null;
+    public List<Truck> GetRentedTruckList(Integer  userid) {
+        List<Truck> truckList = rentMapper.GetRentedTruckList(userid);
+        if(truckList == null) return null;
+        else return truckList;
     }
     public Boolean FindUserRentOrNot(User user) {
+        if(new Select().getRentCar(user) == null) return false;
+        else return true;
+    }
+    public List<PrivateCar> GetPrivateCarList(){
+        List<PrivateCar> privateCarList = carMapper.GetPrivateCarList();
+        if(privateCarList == null) return null;
+        else return privateCarList;
+    }
 
-        return true;
+
+    public List<Truck> GetTruckList() {
+        List<Truck> truckList = carMapper.GetTruckList();
+        if(truckList == null) return null;
+        else return truckList;
     }
     public int rentPrivateCar(int userid,  int carid){
 
