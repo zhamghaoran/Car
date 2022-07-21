@@ -12,6 +12,8 @@ public class Car {
     public Integer price;
     public Integer id;
     public Integer state;
+
+    public Car(){};
     public Car(String brand, Integer price, Integer id, Integer state) {
         this.price = price;
         this.id = id;
