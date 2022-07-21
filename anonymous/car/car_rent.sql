@@ -1,6 +1,6 @@
 create table car.car_rent
 (
-    Id     int auto_increment
+    id     int auto_increment
         primary key,
 
     userid int         not null,
