@@ -7,13 +7,13 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class User {
-    private int Id;
+    private int id;
     private String username;
     private String password;
     private Integer money;
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public void setUsername(String username) {
@@ -29,7 +29,7 @@ public class User {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public String getUsername() {
@@ -45,7 +45,7 @@ public class User {
     }
 
     public User(int id, String username, String password, Integer money) {
-        Id = id;
+        this.id = id;
         this.username = username;
         this.password = password;
         this.money = money;

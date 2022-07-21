@@ -18,4 +18,6 @@ public interface UserMapper {
     @Select("select * from car_user where username=#{username}")
     User SelectUserByUsername(String username);
 
+
+
 }

@@ -2,6 +2,7 @@ package com.car.dao;
 
 import com.car.Class.Car.PrivateCar;
 import com.car.Class.Car.Truck;
+import com.car.Class.User;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.annotations.Select;
 
@@ -24,6 +25,12 @@ public interface CarMapper {
     @Update("update car_truck set state=#{value} where id=#{id}")
     int updateTruckState(@Param("id") Integer id,@Param("value") Integer value);
 
-    List<PrivateCar> GetPrivateCarList();
-    List<Truck> GetTruckList();
+    @Select("select * from car_privatecar")
+    public List<PrivateCar> GetPrivateCarList();
+
+
+    @Select("select * from car_truck")
+    public List<Truck> GetTruckList();
+
+
 }
