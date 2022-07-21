@@ -21,9 +21,9 @@ public class Select implements UserMapper, CarMapper,RentMapper {
     public Select(){
         //新创建一个Session
         session = MybatisUtil.getSession(true);
-         userMapper = session.getMapper(UserMapper.class);
-         rentMapper = session.getMapper(RentMapper.class);
-         carMapper = session.getMapper(CarMapper.class);
+        userMapper = session.getMapper(UserMapper.class);
+        rentMapper = session.getMapper(RentMapper.class);
+        carMapper = session.getMapper(CarMapper.class);
     }
     public User SelectUserLogin(String username, String password) {
         return userMapper.SelectUserLogin(username,password);
@@ -53,6 +53,7 @@ public class Select implements UserMapper, CarMapper,RentMapper {
     }
     public Object getRentCar(User user){
         System.out.println(user);
+
         Integer type = rentMapper.getRentCarType(user);
         if(type == null){
             return null;
@@ -83,8 +84,20 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         else return truckList;
     }
     public Boolean FindUserRentOrNot(User user) {
+        if(new Select().getRentCar(user) == null) return false;
+        else return true;
+    }
+    public List<PrivateCar> GetPrivateCarList(){
+        List<PrivateCar> privateCarList = carMapper.GetPrivateCarList();
+        if(privateCarList == null) return null;
+        else return privateCarList;
+    }
 
-        return true;
+
+    public List<Truck> GetTruckList() {
+        List<Truck> truckList = carMapper.GetTruckList();
+        if(truckList == null) return null;
+        else return truckList;
     }
     public int rentPrivateCar(int userid,  int carid){
 
