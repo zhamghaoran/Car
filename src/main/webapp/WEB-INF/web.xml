@@ -27,4 +27,12 @@
         <servlet-name>rent</servlet-name>
         <url-pattern>/Car/rent</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>return</servlet-name>
+        <servlet-class>com.car.Service.Controller.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>return</servlet-name>
+        <url-pattern>/Car/return</url-pattern>
+    </servlet-mapping>
 </web-app>

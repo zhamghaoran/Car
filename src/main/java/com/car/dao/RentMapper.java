@@ -20,6 +20,8 @@ public interface RentMapper {
     @Insert("insert into car_rent(userid,carid,cartype) values(#{userid},#{carid},2)")
     public int rentPrivateCar(@Param("userid") int userid, @Param("carid") int carid);
 
+    @Insert("insert into car_rent(userid,carid,cartype) values(#{userid},#{carid},1)")
+    public int rentTruck(@Param("userid") int userid, @Param("carid") int carid);
     @Select("select * from car_rent inner join car_privatecar on car_rent.carid = car_privatecar.id where car_rent.userid = #{userid} and car_rent. cartype = 1")
     List<PrivateCar> GetRentedPrivateCarList(Integer userid);
     @Select("select * from car_rent inner join car_truck on car_rent.carid = car_truck.id where car_rent.userid = #{userid} and car_rent.cartype = 2")

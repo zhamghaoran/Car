@@ -1,4 +1,5 @@
 package com.car.Service.Controller;
+import com.car.Class.Car.Car;
 import com.car.Class.Car.PrivateCar;
 import com.car.Class.Car.Truck;
 import com.car.Class.Response;
@@ -36,7 +37,46 @@ public class Service {
 
     public String rent(String username, Integer id, String type) { // 租车
         User user = new Select().SelectUserByUsername(username);
-        return "1";
+        Car car = null;
+        int RentType = 0;
+        if (type.equals("private")){
+            car = new Select().selectCarById(id);
+            RentType = 2;
+        }else {
+            car = new Select().selectTruckById(id);
+            RentType = 1;
+        }
+        //用户是不是已经租车，车是不是已经被用户租
+        if (new Select().FindCarRentedOrNOt(car) || new Select().FindUserRentOrNot(user)){
+            return "车辆已经被别人租用或者用户已租用其他车辆";
+        }else{
+            //将用户和车辆加入租车表
+            int isSuccess = 0;
+            if (RentType == 1){
+                isSuccess = new Select().rentTruck(user.getId(),car.getId());
+            }else {
+                isSuccess = new Select().rentPrivateCar(user.getId(),car.getId());
+            }
+            if (isSuccess==0)return "出错了哟";
+            else return "租车成功！";
+        }
+    }
+
+    public String Return(String username, Integer id){ //还车
+        User user = new Select().SelectUserByUsername(username);
+        int RentType = new Select().getRentCarType(user);
+        if (RentType == 1){
+            List<Truck> list = new Select().GetRentedTruckList(user.getId());
+            for (int i = 0; i < list.size(); i++) {
+                //将车和人移除
+            }
+        }else{
+            List<PrivateCar> list = new Select().GetRentedPrivateCarList(user.getId());
+            for (int i = 0; i < list.size(); i++) {
+                //将车和人移除
+            }
+        }
+        return "111";
     }
 
     public String getprivatecarlist(Integer userid) {  // 获取小车列表

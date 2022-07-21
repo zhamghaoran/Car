@@ -1,5 +1,6 @@
 package com.car.dao;
 
+import com.car.Class.Car.Car;
 import com.car.Class.Car.PrivateCar;
 import com.car.Class.Car.Truck;
 import com.car.Class.User;
@@ -87,6 +88,9 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         if(new Select().getRentCar(user) == null) return false;
         else return true;
     }
+    public boolean FindCarRentedOrNOt(Car car){
+        return (car.state == 1);//0表示没租，1表示已经租出去
+    }
     public List<PrivateCar> GetPrivateCarList(){
         List<PrivateCar> privateCarList = carMapper.GetPrivateCarList();
         if(privateCarList == null) return null;
@@ -100,8 +104,14 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         else return truckList;
     }
     public int rentPrivateCar(int userid,  int carid){
-
         if(rentMapper.rentPrivateCar(userid,carid) > 0 && carMapper.updateTruckState(carid,1) > 0){
+            return 1;
+        }
+        else return 0;
+    }
+    public int rentTruck(int userid,  int carid){
+
+        if(rentMapper.rentPrivateCar(userid,carid) > 0){
             return 1;
         }
         else return 0;
