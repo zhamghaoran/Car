@@ -24,8 +24,10 @@ public class Alltest {
 //        truckList.forEach((K) ->{
 //            System.out.println(K.getBrand());
 //        });
-        List<PrivateCar> truckList = select.GetRentedPrivateCarList(1);
-        truckList.forEach(k -> {System.out.println(k);});
+//        List<PrivateCar> truckList = select.GetRentedPrivateCarList(1);
+//        truckList.forEach(k -> {System.out.println(k);});
+        System.out.println(select.rentPrivateCar(1, 1));
+
 
     }
 
