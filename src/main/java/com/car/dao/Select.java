@@ -42,7 +42,9 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         return carMapper.selectCarById(id);
     }
     public Truck selectTruckById(Integer id) {
-        return carMapper.selectTruckById(id);
+        Truck truck =carMapper.selectTruckById(id);
+        if(truck == null) return null;
+        else return truck;
     }
     public Integer getRentCarType(User user) {
         Integer type = rentMapper.getRentCarType(user);
@@ -72,6 +74,10 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         if(carMapper.updateTruckState(carid,value) > 0)return 1;
         else return 0;
     }
+    public int updatePrivateState(Integer carid,Integer value){
+        if(carMapper.updatePrivateState(carid,value) > 0)return 1;
+        else return 0;
+    }
     @Override
     public List<PrivateCar> GetRentedPrivateCarList(Integer userid) {
         List<PrivateCar>  privateCarList= rentMapper.GetRentedPrivateCarList(userid);
@@ -97,6 +103,11 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         else return privateCarList;
     }
 
+    public PrivateCar selectPrivateById(Integer id){
+        PrivateCar car = selectPrivateById(id);
+        if(car == null) return null;
+        return car;
+    }
 
     public List<Truck> GetTruckList() {
         List<Truck> truckList = carMapper.GetTruckList();
@@ -104,14 +115,17 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         else return truckList;
     }
     public int rentPrivateCar(int userid,  int carid){
-        if(rentMapper.rentPrivateCar(userid,carid) > 0 && carMapper.updateTruckState(carid,1) > 0){
+        PrivateCar toRentCar = carMapper.selectPrivateById(carid);
+        if((toRentCar.getState() != 0 && toRentCar.getState() != null) || toRentCar == null) return 0;
+        if(rentMapper.rentPrivateCar(userid,carid) > 0 && carMapper.updatePrivateState(carid,1) > 0){
             return 1;
         }
         else return 0;
     }
     public int rentTruck(int userid,  int carid){
-
-        if(rentMapper.rentPrivateCar(userid,carid) > 0){
+        Truck truck1 = carMapper.selectTruckById(carid);
+        if((truck1.getState() != 0 && truck1.getState() != null) || truck1 == null) return 0;
+        if(rentMapper.rentTruck(userid,carid) > 0  && carMapper.updateTruckState(carid,1) > 0){
             return 1;
         }
         else return 0;
