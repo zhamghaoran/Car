@@ -93,13 +93,14 @@ public class Select implements UserMapper, CarMapper,RentMapper {
 
     @Override
     public int returnPrivateCar(Integer userid, Integer carid) {
-
-        return 0;
+        int i = rentMapper.returnPrivateCar(userid, carid);
+        return i;
     }
 
     @Override
     public int returnTruck(Integer userid, Integer carid) {
-        return 0;
+        int i = rentMapper.returnTruck(userid, carid);
+        return i;
     }
 
     public Boolean FindUserRentOrNot(User user) {

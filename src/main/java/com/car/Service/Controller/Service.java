@@ -6,7 +6,6 @@ import com.car.Class.Car.Truck;
 import com.car.Class.Response;
 import com.car.Class.User;
 import com.car.dao.Select;
-import com.car.dao.UpdateUser;
 import com.chenerzhu.common.util.SecureUtils;
 import com.google.gson.Gson;
 
@@ -77,9 +76,9 @@ public class Service {
         int RentType = new Select().getRentCarType(user);
 
         if (RentType == 1) {
-            new Select().returnTruck(user.getId(), id);
+            int i = new Select().returnTruck(user.getId(), id);
         } else {
-            new Select().returnPrivateCar(user.getId(), id);
+            int i = new Select().returnPrivateCar(user.getId(), id);
         }
         response.status_message = "还车成功";
         response.status_code = 0;
@@ -106,7 +105,6 @@ public class Service {
             response.status_code = 1;
             response.status_message = "用户名错误";
         } else {
-            new UpdateUser().charge(user, money);
             response.status_code = 0;
             response.status_message = "充值成功";
         }
