@@ -33,6 +33,31 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>return</servlet-name>
-        <url-pattern>/Car/return</url-pattern>
+        <url-pattern>/Car/returncar</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>getprivatecarlist</servlet-name>
+        <servlet-class>com.car.Service.Controller.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getprivatecarlist</servlet-name>
+        <url-pattern>/Car/getprivatecarlist</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>gettrucklist</servlet-name>
+        <servlet-class>com.car.Service.Controller.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>gettrucklist</servlet-name>
+        <url-pattern>/Car/gettrucklist</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>recharge</servlet-name>
+        <servlet-class>com.car.Service.Controller.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>recharge</servlet-name>
+        <url-pattern>/Car/recharge</url-pattern>
+    </servlet-mapping>
+
 </web-app>

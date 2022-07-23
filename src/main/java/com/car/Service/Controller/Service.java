@@ -62,7 +62,7 @@ public class Service {
         }
     }
 
-    public String Return(String username, Integer id){ //还车
+    public String returncar(String username, Integer id){ //还车
         User user = new Select().SelectUserByUsername(username);
         int RentType = new Select().getRentCarType(user);
 
