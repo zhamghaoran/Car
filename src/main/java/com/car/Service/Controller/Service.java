@@ -65,18 +65,13 @@ public class Service {
     public String Return(String username, Integer id){ //还车
         User user = new Select().SelectUserByUsername(username);
         int RentType = new Select().getRentCarType(user);
+
         if (RentType == 1){
-            List<Truck> list = new Select().GetRentedTruckList(user.getId());
-            for (int i = 0; i < list.size(); i++) {
-                //将车和人移除
-            }
+            new Select().returnTruck(user.getId(),id);
         }else{
-            List<PrivateCar> list = new Select().GetRentedPrivateCarList(user.getId());
-            for (int i = 0; i < list.size(); i++) {
-                //将车和人移除
-            }
+            new Select().returnPrivateCar(user.getId(),id);
         }
-        return "111";
+        return "还车成功";
     }
 
     public String getprivatecarlist(Integer userid) {  // 获取小车列表
