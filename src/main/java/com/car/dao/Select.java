@@ -90,6 +90,18 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         if(truckList == null) return null;
         else return truckList;
     }
+
+    @Override
+    public int returnPrivateCar(Integer userid, Integer carid) {
+
+        return 0;
+    }
+
+    @Override
+    public int returnTruck(Integer userid, Integer carid) {
+        return 0;
+    }
+
     public Boolean FindUserRentOrNot(User user) {
         if(new Select().getRentCar(user) == null) return false;
         else return true;

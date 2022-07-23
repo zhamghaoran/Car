@@ -3,8 +3,7 @@ package com.car.dao;
 import com.car.Class.Car.PrivateCar;
 import com.car.Class.Car.Truck;
 import com.car.Class.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -27,7 +26,9 @@ public interface RentMapper {
     @Select("select * from car_rent inner join car_truck on car_rent.carid = car_truck.id where car_rent.userid = #{userid} and car_rent.cartype = 2")
     List<Truck> GetRentedTruckList(Integer userid);
 
-    public int returnPrivateCar(Integer userid,Integer carid);
+    @Delete("delete car_rent where userid = #{userid} and carid = #{carid} and type = 1")
+    public int returnPrivateCar( @Param("userid") Integer userid,@Param("carid") Integer carid);
 
-    public int returnTruck(Integer userid,Integer carid);
+    @Delete("delete car_rent where userid = #{userid} and carid = #{carid} and type = 2")
+    public int returnTruck(@Param("userid") Integer userid,@Param("carid") Integer carid);
 }
