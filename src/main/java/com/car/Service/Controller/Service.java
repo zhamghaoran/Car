@@ -15,6 +15,7 @@ public class Service {
     Response response = new Response();
 
     public String login(String username, String password) {
+        password = SecureUtils.getMD5(password);
         if (new Select().SelectUserLogin(username, password) == null) {
             response.status_code = 1;
             response.status_message = "用户名或者密码错误";
@@ -85,16 +86,16 @@ public class Service {
         return new Gson().toJson(response);
     }
 
-    public String getprivatecarlist(Integer userid) {  // 获取小车列表
-        List<PrivateCar> privateCars = new Select().GetRentedPrivateCarList(userid);
+    public String getprivatecarlist() {  // 获取小车列表
+        List<PrivateCar> privateCars = new Select().GetPrivateCarList();
         Gson gson = new Gson();
         response.status_code = 0;
         response.status_message = null;
         return gson.toJson(response) + gson.toJson(privateCars);
     }
 
-    public String gettrucklist(Integer userid) {   // 获取卡车列表
-        List<Truck> trucks = new Select().GetRentedTruckList(userid);
+    public String gettrucklist() {   // 获取卡车列表
+        List<Truck> trucks = new Select().GetTruckList();
         Gson gson = new Gson();
         return gson.toJson(trucks);
     }
@@ -104,10 +105,12 @@ public class Service {
         if (user == null) {
             response.status_code = 1;
             response.status_message = "用户名错误";
+            return new Gson().toJson(response);
         } else {
             response.status_code = 0;
             response.status_message = "充值成功";
         }
+        new Select().ChargeMoney(user.getId(),money);
         return new Gson().toJson(response);
     }
 

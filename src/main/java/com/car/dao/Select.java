@@ -38,6 +38,11 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         return userMapper.SelectUserByUsername(username);
     }
 
+    @Override
+    public Integer ChargeMoney(Integer id, Integer money) {
+        return userMapper.ChargeMoney(id, money);
+    }
+
     public PrivateCar selectCarById(Integer id) {
         return carMapper.selectCarById(id);
     }
@@ -143,4 +148,5 @@ public class Select implements UserMapper, CarMapper,RentMapper {
         }
         else return 0;
     }
+
 }

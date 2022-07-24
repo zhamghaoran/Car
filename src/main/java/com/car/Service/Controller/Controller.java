@@ -30,9 +30,10 @@ public class Controller extends HttpServlet {
                     parametersValues[i] = parameterObj;
                 }
                 try {
-                    Object invoke = m.invoke(new Service(), parametersValues);
+                    Object invoke = m.invoke(Class.forName("com.car.Service.Controller.Service").newInstance(), parametersValues);
                     resp.getWriter().println(invoke);
-                } catch (InvocationTargetException | IllegalAccessException e) {
+                } catch (InvocationTargetException | IllegalAccessException | InstantiationException |
+                         ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }
             }

@@ -4,6 +4,7 @@ import com.car.Class.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 public interface UserMapper {
     //   登录时的验证
@@ -17,7 +18,8 @@ public interface UserMapper {
 
     @Select("select * from car_user where username=#{username}")
     User SelectUserByUsername(String username);
-
+    @Update("update car_user set money = #{money} where id = #{id}")
+    Integer ChargeMoney(@Param("id") Integer id,@Param("money") Integer money);
 
 
 }
